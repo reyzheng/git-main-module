@@ -1,4 +1,4 @@
 [submodule "reference/git-sub-module"]
 	path = reference/git-sub-module
-	url = ssh://reyzheng@review.gerrithub.io:29418/reyzheng/git-sub-module
+	url = https://github.com/reyzheng/git-sub-module.git
 	branch = main
