@@ -1,0 +1,24 @@
+node {
+    // only Jenkinsfile.mb will be checked-out
+    // specifiy your config repo.
+    def URL = "https://github.com/reyzheng/jenkins-config.git"
+    def BRANCH = "main"
+    def CREDENTIALS = ""
+    // Bring up CTC pipeline framework
+    def mb
+    dir('.pf-bringup') {
+        deleteDir()
+        if (isUnix() == true) {
+            sh "GIT_SSL_NO_VERIFY=true git clone https://github.com/reyzheng/jenkins-pipeline.git ."
+        }
+        else {
+            bat "set GIT_SSL_NO_VERIFY=true && git clone https://github.com/reyzheng/jenkins-pipeline.git ."
+        }
+        sh """
+            echo '@Jenkinsfile.mb'
+            pwd && ls -al
+        """
+        mb = load("hera.groovy")
+    }
+    mb.start(URL, BRANCH, CREDENTIALS)
+}
